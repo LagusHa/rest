@@ -66,8 +66,8 @@ class Bid
      */
     private $information;
     /**
-     * @var int
-     * @ORM\Column(type="integer", length=100)
+     * @var int|null
+     * @ORM\Column(type="integer", length=100, nullable=true)
      */
     private $price;
     /**
@@ -239,7 +239,7 @@ class Bid
     /**
      * @return int
      */
-    public function getPrice(): int
+    public function getPrice(): ?int
     {
         return $this->price;
     }
