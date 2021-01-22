@@ -45,4 +45,59 @@ class BidController extends AbstractController
         return $this->json($bid);
     }
 
+    /**
+     * @Route("/call/{id}", methods={"PATCH"})
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function call(int $id): JsonResponse
+    {
+        $bid = $this->bidService->call($id);
+        return $this->json($bid);
+    }
+
+    /**
+     * @Route("/accept/{id}", methods={"PATCH"})
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function accept(int $id): JsonResponse
+    {
+        $bid = $this->bidService->accept($id);
+        return $this->json($bid);
+    }
+
+    /**
+     * @Route("/reject/{id}", methods={"PATCH"})
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function reject(int $id): JsonResponse
+    {
+        $bid = $this->bidService->reject($id);
+        return $this->json($bid);
+    }
+
+    /**
+     * @Route("/postponed/{id}", methods={"PATCH"})
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function postponed(int $id): JsonResponse
+    {
+        $bid = $this->bidService->postponed($id);
+        return $this->json($bid);
+    }
+
+    /**
+     * @Route("/confirm/{id}", methods={"PATCH"})
+     * @param int $id
+     * @return JsonResponse
+     */
+    public function confirm(int $id): JsonResponse
+    {
+        $bid = $this->bidService->confirm($id);
+        return $this->json($bid);
+    }
+
 }
