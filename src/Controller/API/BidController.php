@@ -25,6 +25,111 @@ class BidController extends AbstractController
     }
 
     /**
+     * @Route("/list", methods={"GET"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function list(Request $request): JsonResponse
+    {
+        $order = $request->query->get('order') ?? 'DESC';
+        $limit = $request->query->get('limit') ?? 10;
+        $offset = $request->query->get('offset') ?? 0;
+
+        $bids = $this->bidService->list(['id' => $order], (int)$limit, (int)$offset);
+        return $this->json($bids);
+    }
+
+    /**
+     * @Route("/list/waiting", methods={"GET"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getWaiting(Request $request): JsonResponse
+    {
+        $order = $request->query->get('order') ?? 'DESC';
+        $limit = $request->query->get('limit') ?? 10;
+        $offset = $request->query->get('offset') ?? 0;
+
+        $bids = $this->bidService->getWaiting(['id' => $order], (int)$limit, (int)$offset);
+        return $this->json($bids);
+    }
+
+    /**
+     * @Route("/list/accepted", methods={"GET"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getAccepted(Request $request): JsonResponse
+    {
+        $order = $request->query->get('order') ?? 'DESC';
+        $limit = $request->query->get('limit') ?? 10;
+        $offset = $request->query->get('offset') ?? 0;
+
+        $bids = $this->bidService->getAccepted(['id' => $order], (int)$limit, (int)$offset);
+        return $this->json($bids);
+    }
+
+    /**
+     * @Route("/list/rejected", methods={"GET"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getRejected(Request $request): JsonResponse
+    {
+        $order = $request->query->get('order') ?? 'DESC';
+        $limit = $request->query->get('limit') ?? 10;
+        $offset = $request->query->get('offset') ?? 0;
+
+        $bids = $this->bidService->getRejected(['id' => $order], (int)$limit, (int)$offset);
+        return $this->json($bids);
+    }
+
+    /**
+     * @Route("/list/called", methods={"GET"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getCalled(Request $request): JsonResponse
+    {
+        $order = $request->query->get('order') ?? 'DESC';
+        $limit = $request->query->get('limit') ?? 10;
+        $offset = $request->query->get('offset') ?? 0;
+
+        $bids = $this->bidService->getCalled(['id' => $order], (int)$limit, (int)$offset);
+        return $this->json($bids);
+    }
+
+    /**
+     * @Route("/list/postponed", methods={"GET"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getPostponed(Request $request): JsonResponse
+    {
+        $order = $request->query->get('order') ?? 'DESC';
+        $limit = $request->query->get('limit') ?? 10;
+        $offset = $request->query->get('offset') ?? 0;
+
+        $bids = $this->bidService->getPostponed(['id' => $order], (int)$limit, (int)$offset);
+        return $this->json($bids);
+    }
+
+    /**
+     * @Route("/list/confirmed", methods={"GET"})
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function getConfirmed(Request $request): JsonResponse
+    {
+        $order = $request->query->get('order') ?? 'DESC';
+        $limit = $request->query->get('limit') ?? 10;
+        $offset = $request->query->get('offset') ?? 0;
+
+        $bids = $this->bidService->getConfirmed(['id' => $order], (int)$limit, (int)$offset);
+        return $this->json($bids);
+    }
+
+    /**
      * @Route("/create", methods={"POST"})
      * @param Request $request
      * @return JsonResponse

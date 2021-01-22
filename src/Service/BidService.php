@@ -17,6 +17,83 @@ class BidService implements BidServiceInterface
     }
 
     /**
+     * @param array $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array
+     */
+    public function list(array $orderBy = [], int $limit = null, int $offset = null): array
+    {
+        return $this->repository->all([], $orderBy, $limit, $offset);
+    }
+
+    /**
+     * @param array $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array
+     */
+    public function getWaiting(array $orderBy = [], int $limit = null, int $offset = null): array
+    {
+        return $this->repository->all(['status' => Bid::WAIT_CALL], $orderBy, $limit, $offset);
+    }
+
+    /**
+     * @param array $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array
+     */
+    public function getAccepted(array $orderBy = [], int $limit = null, int $offset = null): array
+    {
+        return $this->repository->all(['status' => Bid::ACCEPTED], $orderBy, $limit, $offset);
+    }
+
+    /**
+     * @param array $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array
+     */
+    public function getRejected(array $orderBy = [], int $limit = null, int $offset = null): array
+    {
+        return $this->repository->all(['status' => Bid::REJECTED], $orderBy, $limit, $offset);
+    }
+
+    /**
+     * @param array $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array
+     */
+    public function getPostponed(array $orderBy = [], int $limit = null, int $offset = null): array
+    {
+        return $this->repository->all(['status' => Bid::POSTPONED], $orderBy, $limit, $offset);
+    }
+
+    /**
+     * @param array $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array
+     */
+    public function getCalled(array $orderBy = [], int $limit = null, int $offset = null): array
+    {
+        return $this->repository->all(['status' => Bid::CALLED], $orderBy, $limit, $offset);
+    }
+
+    /**
+     * @param array $orderBy
+     * @param int|null $limit
+     * @param int|null $offset
+     * @return array
+     */
+    public function getConfirmed(array $orderBy = [], int $limit = null, int $offset = null): array
+    {
+        return $this->repository->all(['status' => Bid::CONFIRMED], $orderBy, $limit, $offset);
+    }
+
+    /**
      * @param string $lastName
      * @param string $firstName
      * @param string $email

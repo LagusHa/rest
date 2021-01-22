@@ -20,12 +20,22 @@ class BidRepository extends ServiceEntityRepository implements BidRepositoryInte
         $this->manager = $manager;
         parent::__construct($registry, Bid::class);
     }
+
     /**
-     * @return Bid[];
+     * @param array $criteria
+     * @param array|null $orderBy
+     * @param int $limit
+     * @param null $offset
+     * @return Bid[]
      */
-    public function all(): array
+    public function all(array $criteria = [], array $orderBy = null, $limit = 10, $offset = null): array
     {
-        return parent::findAll();
+        if ($orderBy == null){
+            $orderBy['id'] = 'DESC';
+        }
+        $bids = parent::findBy($criteria, $orderBy, $limit, $offset);
+
+        return $bids;
     }
 
     /**
