@@ -48,6 +48,7 @@ class BidService implements BidServiceInterface
         $bid->call();
 
         $this->repository->update($bid);
+        return $bid;
     }
 
     /**
@@ -60,6 +61,7 @@ class BidService implements BidServiceInterface
         $bid->accept();
 
         $this->repository->update($bid);
+        return $bid;
     }
 
     /**
@@ -72,6 +74,7 @@ class BidService implements BidServiceInterface
         $bid->reject();
 
         $this->repository->update($bid);
+        return $bid;
     }
 
     /**
@@ -84,6 +87,7 @@ class BidService implements BidServiceInterface
         $bid->postponed();
 
         $this->repository->update($bid);
+        return $bid;
     }
 
     /**
@@ -96,5 +100,6 @@ class BidService implements BidServiceInterface
         $bid->confirm();
 
         $this->repository->update($bid);
+        return $bid;
     }
 }
