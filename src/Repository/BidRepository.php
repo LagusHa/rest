@@ -8,6 +8,7 @@ use App\Model\Bid;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 class BidRepository extends ServiceEntityRepository implements BidRepositoryInterface
@@ -39,7 +40,7 @@ class BidRepository extends ServiceEntityRepository implements BidRepositoryInte
         $bid = parent::find($id);
 
         if ($bid == null){
-            throw new \RuntimeException("Заявка {$id} не найдена!");
+            throw new NotFoundHttpException("Заявка {$id} не найдена!");
         }
         return $bid;
     }
