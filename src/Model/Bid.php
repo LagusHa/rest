@@ -91,6 +91,9 @@ class Bid
 
     public function accept(): void
     {
+        if ($this->status === self::WAIT_CALL){
+            throw new \LogicException("Нельзя принять не прозвоненную заявку!");
+        }
         if ($this->status === self::REJECTED){
             throw new \LogicException("Нельзя принять отклоненную заявку!");
         }
