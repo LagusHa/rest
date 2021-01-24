@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 
-use App\Model\Bid;
+use App\Entity\Bid;
 use App\Repository\BidRepositoryInterface;
 
 class BidService implements BidServiceInterface
