@@ -1,6 +1,8 @@
 
 ###> symfony/framework-bundle ###
 .idea/
+/local-access_log
+/local-error_log
 /.env.local
 /.env.local.php
 /.env.*.local
