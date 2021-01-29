@@ -5,6 +5,8 @@ namespace App\Entity;
 
 use App\Repository\PrivilegesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ReflectionException;
+use ReflectionObject;
 
 /**
  * @ORM\Entity(repositoryClass=PrivilegesRepository::class)
@@ -62,15 +64,26 @@ class Privileges
         return;
     }
 
-    public function privilegesList(): array
+    /**
+     * @return array
+     */
+    public static function privilegesList(): array
     {
-        $reflect = new \ReflectionObject($this);
-        $props = $reflect->getProperties();
-        $list = [];
-        foreach ($props as $prop){
-            $list[] = $prop->getName();
+        try{
+            $list = [];
+            $reflect = new ReflectionObject(new self());
+
+            $props = $reflect->getProperties();
+
+            foreach ($props as $prop){
+                if ($prop->getName() == 'id') continue;
+                $list[] = $prop->getName();
+            }
+        }catch (ReflectionException $exception){
+
+        }finally{
+            return $list;
         }
-        return $list;
     }
 
     public function changePrivileges(string $property, bool $privilege): void
