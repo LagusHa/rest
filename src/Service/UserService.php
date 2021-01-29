@@ -31,6 +31,7 @@ class UserService implements UserServiceInterface
      */
     public function signUp(string $email, string $password): User
     {
+        $this->emailIsAvailable($email);
         $user = User::singUp($email, $password);
         $this->userRepository->save($user);
         return $user;
@@ -44,6 +45,7 @@ class UserService implements UserServiceInterface
      */
     public function create(string $email, string $password, array $privileges): User
     {
+        $this->emailIsAvailable($email);
         $user = User::createFromAdmin($email, $password, $privileges);
         $this->userRepository->save($user);
         return $user;
@@ -90,5 +92,13 @@ class UserService implements UserServiceInterface
     public function one(int $id): User
     {
         return $this->userRepository->one($id);
+    }
+
+    private function emailIsAvailable(string $email): void
+    {
+        $user = $this->userRepository->all(['email' => $email], null, 1);
+        if (!empty($user)){
+            throw new \LogicException("Данный email уже занят!");
+        }
     }
 }
