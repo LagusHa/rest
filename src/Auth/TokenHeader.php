@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace App\Auth;
 
 
-use Symfony\Component\Intl\Exception\NotImplementedException;
 
 class TokenHeader implements TokenHeaderInterface
 {
@@ -13,7 +12,7 @@ class TokenHeader implements TokenHeaderInterface
 
     /**
      * TokenHeader constructor.
-     * @param array $data
+     * @param array $headers
      * @throws \ReflectionException
      */
     public function __construct(array $headers)
@@ -22,7 +21,7 @@ class TokenHeader implements TokenHeaderInterface
     }
 
     /**
-     * @param array $data
+     * @param array $headers
      * @throws \ReflectionException
      */
     private function initialize(array $headers):void
@@ -32,7 +31,7 @@ class TokenHeader implements TokenHeaderInterface
 
         foreach ($props as $prop){
             if (!isset($headers[$prop->getName()])){
-                throw new \RuntimeException("Не передан" . $prop->getName() . "в TokenData");
+                throw new \RuntimeException("Не передан " . $prop->getName() . " в TokenData");
             }
             $this->{$prop->getName()} = $headers[$prop->getName()];
         }

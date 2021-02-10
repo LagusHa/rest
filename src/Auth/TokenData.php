@@ -4,7 +4,6 @@ declare(strict_types = 1);
 namespace App\Auth;
 
 
-use Symfony\Component\Intl\Exception\NotImplementedException;
 
 class TokenData implements TokenDataInterface
 {
@@ -29,10 +28,9 @@ class TokenData implements TokenDataInterface
     {
         $refl = new \ReflectionClass($this);
         $props = $refl->getProperties();
-
         foreach ($props as $prop){
             if (!isset($data[$prop->getName()])){
-                throw new \RuntimeException("Не передан" . $prop->getName() . "в TokenData");
+                throw new \RuntimeException("Не передан " . $prop->getName() . " в TokenData");
             }
             $this->{$prop->getName()} = $data[$prop->getName()];
         }

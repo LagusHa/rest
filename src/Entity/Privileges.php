@@ -64,6 +64,26 @@ class Privileges
         return;
     }
 
+    public function toArray(): array
+    {
+        try{
+            $list = [];
+            $reflect = new ReflectionObject($this);
+
+            $props = $reflect->getProperties();
+
+            foreach ($props as $prop){
+                if ($prop->getName() == 'id') continue;
+                $prop->setAccessible(true);
+                $list[$prop->getName()] = $prop->getValue($this);
+            }
+        }catch (ReflectionException $exception){
+
+        }finally{
+            return $list;
+        }
+    }
+
     /**
      * @return array
      */
