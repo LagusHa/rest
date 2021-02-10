@@ -6,5 +6,5 @@ namespace App\Auth;
 
 interface TokenEncoderInterface
 {
-    public function encode(TokenHeaderInterface $header, TokenDataInterface $data, string $secret): string;
+    public function encode(TokenDataInterface $data): string;
 }

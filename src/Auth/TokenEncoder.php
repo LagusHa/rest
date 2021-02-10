@@ -6,12 +6,22 @@ namespace App\Auth;
 
 class TokenEncoder implements TokenEncoderInterface
 {
+    private $header;
+    private $secret;
 
-    public function encode(TokenHeaderInterface $header, TokenDataInterface $data, string $secret): string
+    public function __construct(TokenHeaderInterface $header, string $secret)
     {
-        $h = base64_encode(serialize($header));
+        $this->header = $header;
+        $this->secret = $secret;
+    }
+
+    public function encode(TokenDataInterface $data): string
+    {
+        $h = base64_encode(serialize($this->header));
         $d = base64_encode(serialize($data));
-        $s = base64_encode(hash($header->getAlg(), serialize($header) . serialize($data) . $secret));
+        $s = base64_encode(
+            hash($this->header->getAlg(),
+                serialize($this->header) . serialize($data) . $this->secret));
         return $this->concat($h,$d,$s);
     }
 
