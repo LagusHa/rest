@@ -10,15 +10,9 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class FileService implements FileServiceInterface
 {
-    private $imageDirectory;
-    private $repository;
-
-    public function __construct(string $imageDirectory, FileRepositoryInterface $repository)
+    public function __construct(private string $imageDirectory, private FileRepositoryInterface $repository)
     {
-        $this->imageDirectory = $imageDirectory;
-        $this->repository = $repository;
     }
-
     /**
      * @param UploadedFile $uploadedFile
      * @return File

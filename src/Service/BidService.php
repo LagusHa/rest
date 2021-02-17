@@ -9,11 +9,8 @@ use App\Repository\BidRepositoryInterface;
 
 class BidService implements BidServiceInterface
 {
-    private $repository;
-
-    public function __construct(BidRepositoryInterface $repository)
+    public function __construct(private BidRepositoryInterface $repository)
     {
-        $this->repository = $repository;
     }
 
     /**

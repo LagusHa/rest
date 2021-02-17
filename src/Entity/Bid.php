@@ -24,57 +24,57 @@ class Bid
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer", length=11)
      */
-    private $id;
+    private int $id;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $lastName;
+    private string $lastName;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $firstName;
+    private string $firstName;
     /**
      * @var string|null
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $middleName;
+    private ?string $middleName;
     /**
      * @var int
      * @ORM\Column(type="integer", length=3)
      */
-    private $age;
+    private int $age;
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private string $email;
     /**
      * @var string
      * @ORM\Column(type="string", length=15)
      */
-    private $phone;
+    private string $phone;
     /**
      * @var string
      * @ORM\Column(type="string", length=100)
      */
-    private $employ;
+    private string $employ;
     /**
      * @var string|null
      * @ORM\Column(type="text")
      */
-    private $information;
+    private ?string $information;
     /**
      * @var int|null
      * @ORM\Column(type="integer", length=100, nullable=true)
      */
-    private $price;
+    private ?int $price;
     /**
      * @var int
      * @ORM\Column(type="smallint")
      */
-    private $status;
+    private int $status;
 
     public function __construct(string $lastName, string $firstName, string $email,
                                 int $age, string $phone, string $employ)
@@ -176,9 +176,9 @@ class Bid
 
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -240,7 +240,7 @@ class Bid
     }
 
     /**
-     * @return int
+     * @return int|null
      */
     public function getPrice(): ?int
     {

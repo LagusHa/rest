@@ -17,11 +17,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
-    private $entityManager;
-
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry, private EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
         parent::__construct($registry, User::class);
     }
 

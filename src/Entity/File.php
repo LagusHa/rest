@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use App\Repository\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 use Symfony\Component\HttpFoundation\File\File as LoadedFile;
 
 /**
@@ -17,26 +18,26 @@ class File
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $hash;
+    private string $hash;
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $fileName;
+    private string $fileName;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $path;
+    private string $path;
 
     /**
      * @ORM\Column(type="integer", length=100)
      */
-    private $size;
+    private int $size;
 
     public function __construct(LoadedFile $file)
     {
@@ -67,22 +68,34 @@ class File
     }
 
 
-    public function getLink(): string
+    /**
+     * @return string
+     */
+    #[Pure] public function getLink(): string
     {
         return $_ENV['APP_HTTP_HOST'] . "/api/files/" . $this->getHash();
     }
 
+    /**
+     * @return int|null
+     */
     public function getSize(): ?int
     {
         return $this->size;
     }
 
-    public function getDownloadLink(): string
+    /**
+     * @return string
+     */
+    #[Pure] public function getDownloadLink(): string
     {
         return $_ENV['APP_HTTP_HOST'] . "/api/files/" . $this->getHash() . "/download";
     }
 
-    public function fullPath(): string
+    /**
+     * @return string
+     */
+    #[Pure] public function fullPath(): string
     {
         return $this->path() . "/" . $this->getFileName();
     }

@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use App\Repository\PrivilegesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 use ReflectionException;
 use ReflectionObject;
 
@@ -18,44 +19,49 @@ class Privileges
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $loginToDashboard = false;
+    private bool $loginToDashboard = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $callBid = false;
+    private bool $callBid = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $rejectBid = false;
+    private bool $rejectBid = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $acceptBid = false;
+    private bool $acceptBid = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $postponeBid = false;
+    private bool $postponeBid = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $confirmBid = false;
+    private bool $confirmBid = false;
 
-    public static function createDefault(): self
+    /**
+     * @return static
+     */
+    #[Pure] public static function createDefault(): self
     {
-        $privilege = new self();
-        return $privilege;
+        return new self();
     }
 
+    /**
+     * @param $privileges
+     */
     public function fromArray($privileges): void
     {
         foreach ($privileges as $prop => $privilege){
@@ -64,6 +70,9 @@ class Privileges
         return;
     }
 
+    /**
+     * @return array
+     */
     public function toArray(): array
     {
         try{
@@ -78,7 +87,6 @@ class Privileges
                 $list[$prop->getName()] = $prop->getValue($this);
             }
         }catch (ReflectionException $exception){
-
         }finally{
             return $list;
         }
@@ -111,7 +119,6 @@ class Privileges
         if (property_exists($this, $property)) {
             $this->$property = $privilege;
         }
-        return;
     }
 
     /**

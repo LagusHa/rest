@@ -13,11 +13,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BidRepository extends ServiceEntityRepository implements BidRepositoryInterface
 {
-    private $manager;
-
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $manager)
+    /**
+     * BidRepository constructor.
+     * @param ManagerRegistry $registry
+     * @param EntityManagerInterface $manager
+     */
+    public function __construct(ManagerRegistry $registry, private EntityManagerInterface $manager)
     {
-        $this->manager = $manager;
         parent::__construct($registry, Bid::class);
     }
 
@@ -33,9 +35,7 @@ class BidRepository extends ServiceEntityRepository implements BidRepositoryInte
         if ($orderBy == null){
             $orderBy['id'] = 'DESC';
         }
-        $bids = parent::findBy($criteria, $orderBy, $limit, $offset);
-
-        return $bids;
+        return parent::findBy($criteria, $orderBy, $limit, $offset);
     }
 
     /**

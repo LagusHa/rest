@@ -3,17 +3,14 @@ declare(strict_types = 1);
 
 namespace App\Auth;
 
-
-
 class TokenData implements TokenDataInterface
 {
-    private $id;
-    private $privileges;
+    private int $id;
+    private array $privileges;
 
     /**
      * TokenData constructor.
      * @param array $data
-     * @throws \ReflectionException
      */
     public function __construct(array $data)
     {
@@ -22,7 +19,6 @@ class TokenData implements TokenDataInterface
 
     /**
      * @param array $data
-     * @throws \ReflectionException
      */
     private function initialize(array $data):void
     {
@@ -40,7 +36,6 @@ class TokenData implements TokenDataInterface
      * String representation of object
      * @link https://php.net/manual/en/serializable.serialize.php
      * @return string the string representation of the object or null
-     * @throws \ReflectionException
      * @since 5.1.0
      */
     public function serialize()
@@ -64,7 +59,6 @@ class TokenData implements TokenDataInterface
      * </p>
      * @return void
      * @since 5.1.0
-     * @throws \ReflectionException
      */
     public function unserialize($serialized)
     {

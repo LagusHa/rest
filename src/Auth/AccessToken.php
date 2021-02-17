@@ -1,22 +1,24 @@
 <?php
+
 declare(strict_types = 1);
 
 namespace App\Auth;
 
-
 class AccessToken implements AccessTokenInterface
 {
-    private $headers;
-    private $data;
-    private $signature;
-
-    public function __construct(TokenHeaderInterface $headers, TokenDataInterface $data, string $signature)
+    /**
+     * AccessToken constructor.
+     * @param TokenHeaderInterface $headers
+     * @param TokenDataInterface $data
+     * @param string $signature
+     */
+    public function __construct(private TokenHeaderInterface $headers, private TokenDataInterface $data, private string $signature)
     {
-        $this->headers = $headers;
-        $this->data = $data;
-        $this->signature = $signature;
     }
 
+    /**
+     * @return bool
+     */
     public function isVerify(): bool
     {
         $s = base64_encode(
@@ -41,4 +43,5 @@ class AccessToken implements AccessTokenInterface
     {
         return $this->data;
     }
+
 }

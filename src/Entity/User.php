@@ -16,53 +16,53 @@ class User
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $lastName;
+    private ?string $lastName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $firstName;
+    private ?string $firstName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $middleName;
+    private ?string $middleName;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $age;
+    private ?int $age;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $email;
+    private string $email;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\Column(type="string", length=16, nullable=true)
      */
-    private $phone;
+    private ?string $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $employ;
+    private ?string $employ;
 
     /**
      * @ORM\ManyToOne(targetEntity=Privileges::class, cascade={"persist"})
      * @ORM\JoinColumn(name="privileges_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $privileges;
+    private Privileges $privileges;
 
     private function __construct(){}
 

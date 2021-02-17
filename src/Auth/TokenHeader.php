@@ -3,8 +3,6 @@ declare(strict_types = 1);
 
 namespace App\Auth;
 
-
-
 class TokenHeader implements TokenHeaderInterface
 {
     private $alg;
@@ -13,7 +11,6 @@ class TokenHeader implements TokenHeaderInterface
     /**
      * TokenHeader constructor.
      * @param array $headers
-     * @throws \ReflectionException
      */
     public function __construct(array $headers)
     {
@@ -22,7 +19,6 @@ class TokenHeader implements TokenHeaderInterface
 
     /**
      * @param array $headers
-     * @throws \ReflectionException
      */
     private function initialize(array $headers):void
     {
@@ -42,7 +38,6 @@ class TokenHeader implements TokenHeaderInterface
      * @link https://php.net/manual/en/serializable.serialize.php
      * @return string the string representation of the object or null
      * @since 5.1.0
-     * @throws \ReflectionException
      */
     public function serialize()
     {
@@ -60,12 +55,11 @@ class TokenHeader implements TokenHeaderInterface
     /**
      * Constructs the object
      * @link https://php.net/manual/en/serializable.unserialize.php
-     * @param string $serialized <p>
+     * @param $serialized <p>
      * The string representation of the object.
      * </p>
      * @return void
      * @since 5.1.0
-     * @throws \ReflectionException
      */
     public function unserialize($serialized)
     {

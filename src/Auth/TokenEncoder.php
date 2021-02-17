@@ -6,13 +6,8 @@ namespace App\Auth;
 
 class TokenEncoder implements TokenEncoderInterface
 {
-    private $header;
-    private $secret;
-
-    public function __construct(TokenHeaderInterface $header, string $secret)
+    public function __construct(private TokenHeaderInterface $header, private string $secret)
     {
-        $this->header = $header;
-        $this->secret = $secret;
     }
 
     public function encode(TokenDataInterface $data): string

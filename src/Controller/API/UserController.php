@@ -3,11 +3,6 @@ declare(strict_types = 1);
 
 namespace App\Controller\API;
 
-
-use App\Auth\TokenData;
-use App\Auth\TokenEncoderInterface;
-use App\Auth\TokenHeader;
-use App\Auth\TokenHeaderInterface;
 use App\Dto\UserDto;
 use App\Service\UserServiceInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,12 +18,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     private $userService;
-    private $tokenEncoder;
 
-    public function __construct(UserServiceInterface $userService, TokenEncoderInterface $tokenEncoder)
+    public function __construct(UserServiceInterface $userService)
     {
         $this->userService = $userService;
-        $this->tokenEncoder = $tokenEncoder;
     }
 
     /**
@@ -61,26 +54,13 @@ class UserController extends AbstractController
      * @Route("/signup", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
-     * @throws \ReflectionException
      */
     public function signUp(Request $request): JsonResponse
     {
         $data = $request->toArray();
         $user = $this->userService->signUp($data["email"],$data["password"]);
 
-        $token = $this->tokenEncoder->encode(
-            new TokenHeader([
-                'alg' => $_ENV['APP_ALG'],
-                'type' => $_ENV['APP_TYPE']
-            ]),
-            new TokenData([
-                    'id' => $user->getId(),
-                    'privileges' => $user->getPrivileges()->toArray()
-            ]),
-            $_ENV['APP_SECRET']
-        );
-
-        return $this->json(['access_token' => $token]);
+        return $this->json($user);
     }
 
     /**

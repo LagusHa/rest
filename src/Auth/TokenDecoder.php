@@ -17,7 +17,7 @@ class TokenDecoder implements TokenDecoderInterface
 
         $headers = unserialize(base64_decode($arr[0]));
         $data = unserialize(base64_decode($arr[1]));
-        $signature = unserialize(base64_decode($arr[2]));
+        $signature = base64_decode($arr[2]);
 
         return new AccessToken($headers, $data, $signature);
     }

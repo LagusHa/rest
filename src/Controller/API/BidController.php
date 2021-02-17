@@ -17,12 +17,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BidController extends AbstractController
 {
-    private $bidService;
-
-    public function __construct(BidServiceInterface $bidService)
+    public function __construct(private BidServiceInterface $bidService)
     {
-        $this->bidService = $bidService;
     }
+
 
     /**
      * @Route("/list", methods={"GET"})
