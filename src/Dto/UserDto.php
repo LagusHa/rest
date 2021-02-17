@@ -4,15 +4,17 @@ declare(strict_types = 1);
 namespace App\Dto;
 
 
+use App\Entity\Privileges;
+
 class UserDto
 {
-    public $lastName;
-    public $firstName;
-    public $middleName;
-    public $age;
-    public $phone;
-    public $employ;
-    public $privileges;
+    public ?string $lastName;
+    public ?string $firstName;
+    public ?string $middleName;
+    public ?int $age;
+    public ?string $phone;
+    public ?string $employ;
+    public ?array $privileges;
 
     public function __construct(array $array)
     {
